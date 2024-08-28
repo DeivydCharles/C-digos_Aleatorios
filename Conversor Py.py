@@ -1,22 +1,44 @@
+import tkinter as tk
+from tkinter import messagebox
 from datetime import datetime, timedelta
 
-# Convertendo milissegundos em segundos
-milliseconds = int(input("Digite o milisegundo: "))
 
-#milliseconds = 1724238057000
+def convert_time():
+    try:
 
-seconds = milliseconds / 1000.0
+       # Convertendo milissegundos em segundos
+        milliseconds = int(entry.get())
 
-# Convertendo para um objeto datetime
-date_time = datetime.utcfromtimestamp(seconds)
+       #milliseconds = 1724238057000
 
-# UTC do Brasil
-brasil_time = date_time - timedelta(hours=3)
+        seconds = milliseconds / 1000.0
 
-# Saída em um formato de data
-brasil_time.strftime('%Y-%m-%d %H:%M:%S')
-for i in range(10):
-    print()
-print(brasil_time)
-for i in range(5):
-    print()
+       # Convertendo para um objeto datetime
+        date_time = datetime.utcfromtimestamp(seconds)
+
+       # UTC do Brasil
+        brasil_time = date_time - timedelta(hours=3)
+
+       # Saída em um formato de data
+        result_label.config(text=f"Data e hora do Brasil:{brasil_time.strftime('%d-%m-%y %H:%M:%S')}")
+   
+   # Mesagem de erro
+    except ValueError:
+        messagebox.showerror("Erro. Por favor insira o numero do Timestamp correto!")
+
+root = tk.Tk()
+root.title("Conversor Timestamp")
+
+entry_label = tk.Label(root, text="Digite o milisegundo:")
+entry_label.pack()
+
+entry = tk.Entry(root)
+entry.pack()
+
+convert_button = tk.Button(root, text="Converter", command=convert_time)
+convert_button.pack()
+
+result_label = tk.Label(root, text="")
+result_label.pack()
+
+root.mainloop()
