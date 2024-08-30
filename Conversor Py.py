@@ -20,12 +20,13 @@ def convert_time():
         brasil_time = date_time - timedelta(hours=3)
 
        # Saída em um formato de data
-        result_label.config(text=f"Data e hora do Brasil:{brasil_time.strftime('%d-%m-%y %H:%M:%S')}")
+        result_label.config(text=f"Data e hora (UTC-3):\n{brasil_time.strftime('%d-%m-%y %H:%M:%S')}")
    
    # Mesagem de erro
     except ValueError:
         messagebox.showerror("Erro. Por favor insira o numero do Timestamp correto!")
 
+# Configurção da tela do tkinter
 root = tk.Tk()
 root.title("Conversor Timestamp")
 
